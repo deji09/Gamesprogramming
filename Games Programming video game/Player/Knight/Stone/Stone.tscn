@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Player/Knight/Stone/Stone.gd" type="Script" id=1]
+[ext_resource path="res://Swordbeam/VisibilityNotifier2D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Swordbeam/CollisionShape2D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Swordbeam/Sprite.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/Knight/Stone/Stone.png" type="Texture" id=5]
+
+
+[node name="Swordbeam " type="Area2D"]
+pause_mode = 1
+scale = Vector2( 0.5, 0.5 )
+collision_layer = 2147483649
+collision_mask = 8
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" parent="." instance=ExtResource( 3 )]
+visible = true
+
+[node name="VisibilityNotifier2D" parent="." instance=ExtResource( 2 )]
+
+[node name="Sprite" parent="." instance=ExtResource( 4 )]
+pause_mode = 1
+position = Vector2( 0, 3.75 )
+rotation = 0.0
+scale = Vector2( 0.48913, 0.5 )
+texture = ExtResource( 5 )
+
+[editable path="Sprite"]

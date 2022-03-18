@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://TitleScreen/OptionsButtons.tscn" type="PackedScene" id=1]
+[ext_resource path="res://TitleScreen/doomed.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://TitleScreen/NewGameButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://TitleScreen/ContinueButtons.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game assets/Title Background/Image without mist.png" type="Texture" id=5]
+[ext_resource path="res://TitleScreen/FadeIn.tscn" type="PackedScene" id=6]
+[ext_resource path="res://World/TitleScreen.gd" type="Script" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 640.0
+margin_bottom = 420.0
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="VBoxContainer" parent="."]
+margin_left = 50.0
+margin_top = 37.4802
+margin_right = 600.0
+margin_bottom = 377.48
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Menu"]
+margin_right = 550.0
+margin_bottom = 77.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_y = 10
+text = "Babels Gambit"
+align = 1
+
+[node name="Center" type="HBoxContainer" parent="Menu"]
+margin_top = 81.0
+margin_right = 550.0
+margin_bottom = 339.0
+size_flags_vertical = 3
+
+[node name="Buttons" type="VBoxContainer" parent="Menu/Center"]
+margin_right = 550.0
+margin_bottom = 258.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="NewGameButton" parent="Menu/Center/Buttons" instance=ExtResource( 3 )]
+margin_top = 35.0
+margin_bottom = 95.0
+rect_min_size = Vector2( 360, 60 )
+
+[node name="ContinueButtons" parent="Menu/Center/Buttons" instance=ExtResource( 4 )]
+margin_top = 99.0
+margin_bottom = 159.0
+rect_min_size = Vector2( 360, 60 )
+
+[node name="OptionsButtons" parent="Menu/Center/Buttons" instance=ExtResource( 1 )]
+margin_top = 163.0
+margin_bottom = 223.0
+rect_min_size = Vector2( 360, 60 )
+
+[node name="FadeIn" parent="." instance=ExtResource( 6 )]
+[connection signal="pressed" from="Menu/Center/Buttons/NewGameButton" to="." method="_on_NewGameButton_pressed"]

@@ -1,0 +1,283 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://Enemies/Electric bat.png" type="Texture" id=1]
+[ext_resource path="res://Shadow/SmallShadow.png" type="Texture" id=2]
+[ext_resource path="res://Hitboxes and Hurtboxes/Hurtbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GameEnemies/Start.tres" type="Animation" id=4]
+[ext_resource path="res://Effects/HitEffect.png" type="Texture" id=5]
+[ext_resource path="res://Stats.tscn" type="PackedScene" id=6]
+[ext_resource path="res://HP bar/HPBar.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Effects/PlayerDetectionZone.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Hitboxes and Hurtboxes/Hitbox.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Hitboxes and Hurtboxes/SoftCollision.tscn" type="PackedScene" id=10]
+[ext_resource path="res://WhiteShader.shader" type="Shader" id=11]
+[ext_resource path="res://Enemies/WanderController.tscn" type="PackedScene" id=12]
+[ext_resource path="res://GameEnemies/Stop.tres" type="Animation" id=13]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 11 )
+shader_param/active = true
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends KinematicBody2D
+const EnemyDeathEffect = preload(\"res://Effects/EnemyDeathEffect.tscn\")
+var velocity = Vector2.ZERO
+var knockback = Vector2.ZERO
+onready var items = []
+var dir = Directory.new()
+onready var path = \"res://GameEnemies/Items/\"
+onready var bat = $bat
+onready var stats = $Stats
+onready var PlayerDetectionZone = $PlayerDetectionZone
+onready var hurtbox = $Hurtbox
+onready var softcollision = $SoftCollision
+onready var WanderController = $WanderController 
+export var acceleration = 120
+export var maxSpeed = 100 
+export var WanderTargetRange = 4
+onready var AnimationPlayer = $AnimationPlayer
+onready var damage = 1
+
+func _ready():
+	state = PickRandomState([IDLE,WANDER])
+	getitems()
+	$Hitbox.damage = damage
+enum {
+	IDLE,
+	WANDER,
+	ATTACK
+}
+var state = IDLE 
+func _physics_process(delta):
+	knockback = knockback.move_toward(Vector2.ZERO,150*delta)
+	knockback = move_and_slide(knockback)
+	
+	match state: 
+		IDLE:
+			velocity = velocity.move_toward(Vector2.ZERO,150 * delta) 
+			chasePlayer()
+			
+			if WanderController.getTimeLeft() == 0:
+				NewWander()
+		WANDER:
+			chasePlayer()
+			if WanderController.getTimeLeft() == 0:
+				NewWander()
+				
+			MoveToPoint(WanderController.targetPosition,delta)
+
+			if global_position.distance_to(WanderController.targetPosition) <= 4:
+				NewWander()
+		ATTACK:
+			var player = PlayerDetectionZone.player
+			if player != null:
+				MoveToPoint(player.global_position,delta)
+
+			else:
+				state = IDLE
+
+	if softcollision.is_colliding():
+		velocity += softcollision.getPushVector() * delta * 600
+	velocity = move_and_slide(velocity)
+func chasePlayer():
+	if PlayerDetectionZone.playerVisible():
+		state = ATTACK
+func PickRandomState(StateList):
+	StateList.shuffle()
+	return StateList.pop_front()
+func NewWander():
+	state = PickRandomState([IDLE,WANDER])
+	WanderController.StartTimer(rand_range(1,3))
+func _on_Hurtbox_area_entered(area):
+	stats.health -= area.damage	
+	$HPBar.setpercentvalueint(float(stats.health)/stats.maxhealth *100)
+	if area.rangedHit == false:
+		knockback = area.knockback_vector *1.4
+		hurtbox.startInvincibility(0.5)
+		hurtbox.createHitEffect()
+	else:
+		knockback = area.knockback_vector *1.4
+		hurtbox.startInvincibility(0.1)
+		hurtbox.createHitEffect()
+		area.queue_free()
+	
+func MoveToPoint(Point , delta):
+	var direction = global_position.direction_to(Point)
+	velocity = velocity.move_toward(direction * maxSpeed, acceleration *delta)
+	bat.flip_h = velocity.x <0
+func _on_Stats_no_health():
+		randomize()
+		var chance = randi() % 100
+		if chance <25:
+			dropitem()
+		queue_free()
+		var enemyDeathEffect = EnemyDeathEffect.instance()
+		get_parent().add_child(enemyDeathEffect)
+		enemyDeathEffect.global_position = global_position
+
+func getitems():
+	var numScenes = 0
+	if dir.open(path)==OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while (file_name != \"\"):
+			if file_name == \"..\" or file_name == \".\":
+				pass
+			else:
+				items.push_back(load(path+file_name).instance())
+			if dir.current_is_dir():
+				numScenes += 1
+			file_name = dir.get_next()
+func dropitem():
+	randomize()
+	var chance = randi() % 3
+	get_parent().add_child(items[chance])
+	items[chance].position = global_position
+
+
+
+func _on_Hurtbox_invincibilityStarted():
+	AnimationPlayer.play(\"Start\")
+
+
+func _on_Hurtbox_invinciblityEnded():
+	AnimationPlayer.play(\"Stop\")
+"
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = ExtResource( 11 )
+shader_param/active = false
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 16, 24 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 0, 16, 24 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 16, 24 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 16, 24 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 16, 24 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 5 )
+region = Rect2( 24, 0, 24, 24 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "flying ",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "death",
+"speed": 10.0
+} ]
+
+[sub_resource type="CircleShape2D" id=12]
+radius = 8.0
+
+[sub_resource type="CapsuleShape2D" id=13]
+radius = 8.0
+height = 6.0
+
+[sub_resource type="CircleShape2D" id=14]
+radius = 205.925
+
+[sub_resource type="CircleShape2D" id=15]
+radius = 4.89136
+
+[node name="Bat" type="KinematicBody2D"]
+pause_mode = 1
+material = SubResource( 1 )
+collision_layer = 16
+collision_mask = 2147483656
+script = SubResource( 2 )
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="bat" type="AnimatedSprite" parent="."]
+pause_mode = 1
+material = SubResource( 3 )
+scale = Vector2( 0.975308, 1 )
+frames = SubResource( 11 )
+animation = "flying "
+frame = 2
+playing = true
+offset = Vector2( 0, -12 )
+
+[node name="Shadow" type="Sprite" parent="."]
+position = Vector2( 0, 4 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 4 )
+scale = Vector2( 0.5, 0.5 )
+shape = SubResource( 12 )
+one_way_collision = true
+
+[node name="Hurtbox" parent="." instance=ExtResource( 3 )]
+collision_layer = 2147483656
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2( 0, -12 )
+shape = SubResource( 13 )
+
+[node name="Stats" parent="." instance=ExtResource( 6 )]
+
+[node name="HPBar" parent="." instance=ExtResource( 7 )]
+margin_left = -14.1324
+margin_top = -43.2378
+margin_right = 25.8676
+margin_bottom = -3.23779
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 8 )]
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+modulate = Color( 1, 1, 1, 0.215686 )
+shape = SubResource( 14 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 9 )]
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( 1.25992, -14.3587 )
+
+[node name="SoftCollision" parent="." instance=ExtResource( 10 )]
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+position = Vector2( 0.393982, 4.16843 )
+shape = SubResource( 15 )
+
+[node name="WanderController" parent="." instance=ExtResource( 12 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Start = ExtResource( 4 )
+anims/Stop = ExtResource( 13 )
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="invincibilityStarted" from="Hurtbox" to="." method="_on_Hurtbox_invincibilityStarted"]
+[connection signal="invinciblityEnded" from="Hurtbox" to="." method="_on_Hurtbox_invinciblityEnded"]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+
+[editable path="PlayerDetectionZone"]
+
+[editable path="Hitbox"]
+
+[editable path="SoftCollision"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/xDeviruchi - And The Journey Begins .wav-63dac7c872b58a6b67afe2b6f7217090.sample"
+
+[deps]
+
+source_file="res://Game assets/xDeviruchi - 8-bit Fantasy  & Adventure Music (2021)/xDeviruchi - And The Journey Begins .wav"
+dest_files=[ "res://.import/xDeviruchi - And The Journey Begins .wav-63dac7c872b58a6b67afe2b6f7217090.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

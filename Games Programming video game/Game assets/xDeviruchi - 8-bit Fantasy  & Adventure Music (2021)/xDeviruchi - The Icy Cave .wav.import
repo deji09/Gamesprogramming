@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/xDeviruchi - The Icy Cave .wav-3a6abc0bc330b2da3c5e862c847369bd.sample"
+
+[deps]
+
+source_file="res://Game assets/xDeviruchi - 8-bit Fantasy  & Adventure Music (2021)/xDeviruchi - The Icy Cave .wav"
+dest_files=[ "res://.import/xDeviruchi - The Icy Cave .wav-3a6abc0bc330b2da3c5e862c847369bd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

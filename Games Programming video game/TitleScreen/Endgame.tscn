@@ -1,0 +1,156 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://TitleScreen/doomed.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://TitleScreen/Endgame.gd" type="Script" id=2]
+[ext_resource path="res://TitleScreen/AudioStreamPlayer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/martial Hero/Death.png" type="Texture" id=4]
+[ext_resource path="res://Player/Viking/sprites_viking_axe/axe_origin/dead_4.png" type="Texture" id=5]
+[ext_resource path="res://Player/Viking/sprites_viking_axe/axe_origin/dead_3.png" type="Texture" id=6]
+[ext_resource path="res://Player/Viking/sprites_viking_axe/axe_origin/dead_2.png" type="Texture" id=7]
+[ext_resource path="res://Player/Viking/sprites_viking_axe/axe_origin/dead_1.png" type="Texture" id=8]
+[ext_resource path="res://Player/Knight/sword_1/fall_back_2.png" type="Texture" id=9]
+[ext_resource path="res://Player/Knight/sword_1/fall_back_5.png" type="Texture" id=10]
+[ext_resource path="res://Player/Knight/sword_1/fall_back_3.png" type="Texture" id=11]
+[ext_resource path="res://Player/Knight/sword_1/fall_back_1.png" type="Texture" id=12]
+[ext_resource path="res://Player/Knight/sword_1/fall_back_4.png" type="Texture" id=13]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 1 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 200, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 400, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 600, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 800, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 1000, 0, 200, 200 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": false,
+"name": "Death",
+"speed": 10.0
+} ]
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ) ],
+"loop": false,
+"name": "Death",
+"speed": 10.0
+} ]
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ ExtResource( 12 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 10 ) ],
+"loop": false,
+"name": "Death",
+"speed": 10.0
+} ]
+
+[node name="Endgame" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ColorRect"]
+anchor_right = 1.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+text = "Game OVER
+Another Victim For the tower"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenu" type="Button" parent="."]
+anchor_left = 0.506
+anchor_top = 0.666
+anchor_right = 0.506
+anchor_bottom = 0.666
+margin_left = -41.4029
+margin_top = -9.93839
+margin_right = 41.5971
+margin_bottom = 10.0616
+text = "Main Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Samurai" type="AnimatedSprite" parent="MainMenu"]
+visible = false
+position = Vector2( -57.6767, -152.645 )
+frames = SubResource( 2 )
+animation = "Death"
+frame = 5
+centered = false
+
+[node name="Viking" type="AnimatedSprite" parent="MainMenu"]
+visible = false
+position = Vector2( 43.7034, -78.3189 )
+scale = Vector2( 1.77299, 2.04056 )
+frames = SubResource( 9 )
+animation = "Death"
+frame = 3
+
+[node name="Knight" type="AnimatedSprite" parent="MainMenu"]
+visible = false
+position = Vector2( 45.19, -74.1567 )
+scale = Vector2( 1.97515, 1.96623 )
+frames = SubResource( 10 )
+animation = "Death"
+frame = 4
+
+[node name="Exit" type="Button" parent="."]
+anchor_left = 0.503
+anchor_top = 0.781
+anchor_right = 0.503
+anchor_bottom = 0.781
+margin_left = -17.1953
+margin_top = -10.0754
+margin_right = 17.8047
+margin_bottom = 9.92456
+text = "Exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource( 3 )]
+[connection signal="pressed" from="MainMenu" to="." method="_on_Main_Menu_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_Exit_pressed"]

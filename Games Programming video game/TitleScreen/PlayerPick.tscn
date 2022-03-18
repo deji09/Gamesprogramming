@@ -1,0 +1,267 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://Game assets/Title Background/Image.png" type="Texture" id=1]
+[ext_resource path="res://Player/martial Hero/Idle.png" type="Texture" id=2]
+[ext_resource path="res://Player/Viking/sprites_viking_axe/axe_origin/ready_4.png" type="Texture" id=3]
+[ext_resource path="res://Player/Viking/sprites_viking_axe/axe_origin/ready_5.png" type="Texture" id=4]
+[ext_resource path="res://Player/Viking/sprites_viking_axe/axe_origin/ready_2.png" type="Texture" id=5]
+[ext_resource path="res://Player/Viking/sprites_viking_axe/axe_origin/ready_1.png" type="Texture" id=6]
+[ext_resource path="res://Player/Viking/sprites_viking_axe/axe_origin/ready_3.png" type="Texture" id=7]
+[ext_resource path="res://Player/Viking/sprites_viking_axe/axe_origin/ready_6.png" type="Texture" id=8]
+[ext_resource path="res://Player/Knight/sword_1/ready_3.png" type="Texture" id=9]
+[ext_resource path="res://Player/Knight/sword_1/ready_2.png" type="Texture" id=10]
+[ext_resource path="res://Player/Knight/sword_1/ready_1.png" type="Texture" id=11]
+[ext_resource path="res://times new roman.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://TitleScreen/PlayerPick.gd" type="Script" id=13]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://TitleScreen/doomed.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 12
+use_filter = true
+font_data = ExtResource( 12 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 200, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 400, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 600, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 800, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 1000, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 1200, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 1400, 0, 200, 200 )
+
+[sub_resource type="SpriteFrames" id=12]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "ready",
+"speed": 10.0
+} ]
+
+[sub_resource type="DynamicFont" id=13]
+size = 12
+use_filter = true
+font_data = ExtResource( 12 )
+
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "Ready",
+"speed": 10.0
+} ]
+
+[sub_resource type="DynamicFont" id=15]
+size = 12
+font_data = ExtResource( 12 )
+
+[sub_resource type="SpriteFrames" id=16]
+animations = [ {
+"frames": [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "Ready",
+"speed": 5.0
+} ]
+
+[node name="PlayerPick" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+anchor_right = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="NinePatchRect/VBoxContainer"]
+margin_right = 640.0
+margin_bottom = 62.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_y = 5
+text = "Player Selection"
+align = 1
+autowrap = true
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -103.0
+margin_right = 203.0
+margin_bottom = 103.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Samurai2" type="Label" parent="NinePatchRect2"]
+margin_left = 24.9734
+margin_top = 82.8378
+margin_right = 219.973
+margin_bottom = 289.838
+custom_fonts/font = SubResource( 3 )
+text = "Name: Samurai
+Playstyle: Agile and quick but low defense and health
+Health = 4
+Damage: 1
+Defense: 20% of damage blocked
+Passive: Nimble, moves quicker and dashes farther.
+Ranged Attack: Shuriken"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Samurai" type="AnimatedSprite" parent="NinePatchRect2"]
+position = Vector2( -7.13527, -58.2712 )
+scale = Vector2( 1.16054, 1.11 )
+frames = SubResource( 12 )
+animation = "ready"
+frame = 5
+playing = true
+centered = false
+
+[node name="Viking2" type="Label" parent="NinePatchRect2"]
+margin_left = 243.081
+margin_top = 90.4054
+margin_right = 448.081
+margin_bottom = 318.405
+custom_fonts/font = SubResource( 13 )
+text = "Name: Viking
+Playstyle: well rounded in all stats
+Health = 6
+Damage: 1
+Defense: 35% of damage blocked
+Passive: Savage, has no ranged attack, but has a second melee attack that does double the damage."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viking" type="AnimatedSprite" parent="NinePatchRect2"]
+position = Vector2( 340.411, 45.1899 )
+scale = Vector2( 2.03461, 2.09011 )
+frames = SubResource( 14 )
+animation = "Ready"
+frame = 2
+playing = true
+
+[node name="Knight2" type="Label" parent="NinePatchRect2"]
+margin_left = 485.541
+margin_top = 91.8648
+margin_right = 655.541
+margin_bottom = 286.865
+custom_fonts/font = SubResource( 15 )
+text = "Name: Knight
+Playstyle: High health, and defense, but low mobility
+Health = 8
+Damage: 1
+Defense: 50% of damage blocked
+Passive:Full metal, because of his armour the knight takes reduced damage.
+Ranged attack: Stone toss"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Knight" type="AnimatedSprite" parent="NinePatchRect2"]
+position = Vector2( 582.118, 52.0279 )
+scale = Vector2( 2.26056, 2.15205 )
+frames = SubResource( 16 )
+animation = "Ready"
+frame = 2
+playing = true
+
+[node name="Button" type="Button" parent="."]
+margin_left = 83.8395
+margin_top = 92.7586
+margin_right = 146.84
+margin_bottom = 112.759
+text = "Samurai"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="."]
+margin_left = 308.599
+margin_top = 92.164
+margin_right = 358.599
+margin_bottom = 112.164
+text = "Viking"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button3" type="Button" parent="."]
+margin_left = 552.387
+margin_top = 94.542
+margin_right = 615.387
+margin_bottom = 114.542
+text = "Knight"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button4" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -41.5
+margin_top = -20.0
+margin_right = 41.5
+text = "Main Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_Button3_pressed"]
+[connection signal="pressed" from="Button4" to="." method="_on_Button4_pressed"]

@@ -1,0 +1,396 @@
+[gd_scene load_steps=36 format=2]
+
+[ext_resource path="res://World/Autotile.gd" type="Script" id=1]
+[ext_resource path="res://World/MonsterContainer.gd" type="Script" id=2]
+[ext_resource path="res://16x16 RPG Item Pack/Item__00.png" type="Texture" id=3]
+[ext_resource path="res://16x16 RPG Item Pack/Item__25.png" type="Texture" id=4]
+[ext_resource path="res://16x16 RPG Item Pack/Item__64.png" type="Texture" id=5]
+[ext_resource path="res://World/Sword.gd" type="Script" id=6]
+[ext_resource path="res://World/Shield.gd" type="Script" id=7]
+[ext_resource path="res://World/Apple.gd" type="Script" id=8]
+[ext_resource path="res://black screen.jpg" type="Texture" id=9]
+[ext_resource path="res://World/Control.gd" type="Script" id=10]
+[ext_resource path="res://HP bar/HPBar.tscn" type="PackedScene" id=11]
+[ext_resource path="res://UI/UI.tscn" type="PackedScene" id=12]
+[ext_resource path="res://times new roman.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://Game assets/xDeviruchi - 8-bit Fantasy  & Adventure Music (2021)/xDeviruchi - And The Journey Begins .wav" type="AudioStream" id=14]
+[ext_resource path="res://Game assets/xDeviruchi - 8-bit Fantasy  & Adventure Music (2021)/xDeviruchi - Decisive Battle.wav" type="AudioStream" id=15]
+[ext_resource path="res://Game assets/xDeviruchi - 8-bit Fantasy  & Adventure Music (2021)/xDeviruchi - Exploring The Unknown.wav" type="AudioStream" id=16]
+[ext_resource path="res://Game assets/xDeviruchi - 8-bit Fantasy  & Adventure Music (2021)/xDeviruchi - Mysterious Dungeon.wav" type="AudioStream" id=17]
+[ext_resource path="res://Game assets/xDeviruchi - 8-bit Fantasy  & Adventure Music (2021)/xDeviruchi - The Icy Cave .wav" type="AudioStream" id=18]
+[ext_resource path="res://Game assets/xDeviruchi - 8-bit Fantasy  & Adventure Music (2021)/xDeviruchi - Prepare for Battle! .wav" type="AudioStream" id=19]
+[ext_resource path="res://Game assets/xDeviruchi - 8-bit Fantasy  & Adventure Music (2021)/xDeviruchi - Minigame .wav" type="AudioStream" id=20]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+light_mode = 1
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="TileSet" id=6]
+0/name = "black screen.jpg 0"
+0/texture = ExtResource( 9 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 432, Vector2( 0, 1 ), 54, Vector2( 1, 0 ), 216, Vector2( 1, 1 ), 27 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 16, 16 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 2 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 3 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 1 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 1 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 5 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=11]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=12]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="TileSet" id=13]
+0/name = "black screen.jpg 0"
+0/texture = ExtResource( 9 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 80, 176, 192, 112 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 5, 2 ), 432, Vector2( 5, 3 ), 54, Vector2( 6, 2 ), 216, Vector2( 6, 3 ), 27 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 16, 16 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 7 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 5, 2 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 7 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 5, 2 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 8 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 5, 2 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 9 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 6, 2 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 10 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 5, 3 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 11 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 6, 3 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 12 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
+[sub_resource type="Animation" id=14]
+resource_name = "ChangeAnimation"
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=15]
+font_data = ExtResource( 13 )
+
+[node name="World" type="Node2D"]
+material = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="border" type="TileMap" parent="."]
+tile_set = SubResource( 6 )
+cell_size = Vector2( 16, 16 )
+cell_y_sort = true
+collision_layer = 17
+collision_mask = 17
+format = 1
+
+[node name="Black" type="TileMap" parent="."]
+tile_set = SubResource( 13 )
+cell_size = Vector2( 16, 16 )
+cell_y_sort = true
+format = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+anims/ChangeAnimation = SubResource( 14 )
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource( 12 )]
+margin_left = 209.493
+margin_top = 0.0
+margin_right = 270.493
+margin_bottom = 40.0
+
+[node name="Label" parent="CanvasLayer/UI" index="0"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+
+[node name="HPBar" parent="CanvasLayer" instance=ExtResource( 11 )]
+margin_left = -7.6553
+margin_top = -48.6147
+margin_right = 179.345
+margin_bottom = 75.3853
+rect_scale = Vector2( 1.14593, 1.09436 )
+expand = true
+
+[node name="TextureProgress" parent="CanvasLayer/HPBar" index="0"]
+anchor_left = 0.00331078
+anchor_right = 0.00331078
+margin_left = 9.38088
+margin_top = -14.0
+margin_right = 174.381
+margin_bottom = 136.0
+nine_patch_stretch = true
+
+[node name="UI1" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sword" type="Sprite" parent="CanvasLayer/UI1"]
+position = Vector2( 13.7332, 46.0346 )
+texture = ExtResource( 3 )
+script = ExtResource( 6 )
+
+[node name="sword" type="Label" parent="CanvasLayer/UI1/Sword"]
+margin_left = -13.7332
+margin_top = 8.0
+margin_right = 26.2668
+margin_bottom = 22.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UI2" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shield" type="Sprite" parent="CanvasLayer/UI2"]
+pause_mode = 1
+position = Vector2( 93.9141, 45.7983 )
+texture = ExtResource( 4 )
+script = ExtResource( 7 )
+
+[node name="shield" type="Label" parent="CanvasLayer/UI2/Shield"]
+margin_left = -13.7332
+margin_top = 8.0
+margin_right = 26.2668
+margin_bottom = 22.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="UI3" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Apple" type="Sprite" parent="CanvasLayer/UI3"]
+pause_mode = 1
+position = Vector2( 183.227, 46.0346 )
+texture = ExtResource( 5 )
+script = ExtResource( 8 )
+
+[node name="apple" type="Label" parent="CanvasLayer/UI3/Apple"]
+margin_left = -13.7332
+margin_top = 8.0
+margin_right = 26.2668
+margin_bottom = 22.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -320.0
+margin_top = 144.087
+margin_right = 320.0
+margin_bottom = 212.087
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 120.181
+margin_top = -10.5595
+margin_right = 160.181
+margin_bottom = 8.44049
+custom_fonts/font = SubResource( 15 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[node name="MonsterContainer" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="BossSpawner" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+autostart = true
+
+[node name="accouncetimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Music" type="Node2D" parent="."]
+
+[node name="A1" type="AudioStreamPlayer2D" parent="Music"]
+stream = ExtResource( 14 )
+volume_db = -10.0
+
+[node name="A2" type="AudioStreamPlayer2D" parent="Music"]
+stream = ExtResource( 15 )
+volume_db = -10.0
+
+[node name="A3" type="AudioStreamPlayer2D" parent="Music"]
+stream = ExtResource( 16 )
+volume_db = -10.0
+
+[node name="A4" type="AudioStreamPlayer2D" parent="Music"]
+stream = ExtResource( 17 )
+volume_db = -10.0
+
+[node name="A5" type="AudioStreamPlayer2D" parent="Music"]
+stream = ExtResource( 20 )
+volume_db = -10.0
+
+[node name="A6" type="AudioStreamPlayer2D" parent="Music"]
+stream = ExtResource( 19 )
+volume_db = -10.0
+
+[node name="A7" type="AudioStreamPlayer2D" parent="Music"]
+stream = ExtResource( 18 )
+volume_db = -10.0
+[connection signal="animation_finished" from="CanvasLayer/AnimationPlayer" to="." method="fadanimationfinished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="BossSpawner" to="." method="_on_BossSpawner_timeout"]
+[connection signal="timeout" from="accouncetimer" to="." method="_on_accouncetimer_timeout"]
+
+[editable path="CanvasLayer/UI"]
+
+[editable path="CanvasLayer/HPBar"]

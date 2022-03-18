@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UI/UI.gd" type="Script" id=1]
+
+[node name="UI" type="Control"]
+margin_left = -249.84
+margin_top = -319.15
+margin_right = -204.84
+margin_bottom = -302.15
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+align = 1
+valign = 1

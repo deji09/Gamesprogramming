@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Game assets/Title Background/Image without mist.png" type="Texture" id=1]
+[ext_resource path="res://TitleScreen/doomed.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://TitleScreen/Instruction pages/Boss spawned.png" type="Texture" id=3]
+[ext_resource path="res://TitleScreen/Instruction pages/BossSummon.png" type="Texture" id=4]
+[ext_resource path="res://TitleScreen/Instructions3.gd" type="Script" id=5]
+[ext_resource path="res://TitleScreen/AudioStreamPlayer.tscn" type="PackedScene" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[node name="Instructions3" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 374.543, 131.886 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -165.5
+margin_right = 165.5
+margin_bottom = 65.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_y = 10
+text = "How To Play"
+
+[node name="Button" type="Button" parent="NinePatchRect"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -27.0
+margin_right = 87.0
+custom_fonts/font = SubResource( 2 )
+text = "Previous"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+margin_left = 1.0
+margin_top = 116.0
+margin_right = 316.0
+margin_bottom = 315.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect3" type="NinePatchRect" parent="."]
+margin_left = 317.002
+margin_top = 114.0
+margin_right = 640.002
+margin_bottom = 314.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 4.0
+margin_top = 326.0
+margin_right = 636.0
+margin_bottom = 391.0
+text = "On the stage, a key will spawn when this key is attacked it will summon the boss,
+ if the player wins they go to the next stage. If the player dies they will have to start again.
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource( 6 )]
+[connection signal="pressed" from="NinePatchRect/Button" to="." method="_on_Button_pressed"]

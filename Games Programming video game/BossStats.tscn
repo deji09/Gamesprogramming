@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node
+
+export(float) var maxhealth =4
+onready var health = maxhealth setget sethealth
+
+
+signal no_health
+signal boss_Death
+
+func sethealth(value):
+	health = value
+	if health <= 0:
+		emit_signal(\"no_health\")
+		emit_signal(\"boss_Death\")
+"
+
+[node name="Stats" type="Node"]
+pause_mode = 1
+script = SubResource( 1 )
